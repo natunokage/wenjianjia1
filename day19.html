@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+        <title></title>
+        <style>
+            /*重置样式*/
+            *{margin:0;padding:0;box-sizing: border-box;font-family: "微软雅黑";}
+            fieldset,img{border: 0;}
+            h1,h2,h3,h4,em,i,b,strong{font-style:normal;font-weight:normal;}
+            ul,ol{list-style:none;}
+            a{text-decoration:none;color: #333333;}
+            img{vertical-align: middle;}
+            input,button,select{outline: none;cursor: pointer;}
+            html,body{
+                height: 100%;
+            }
+            #car{
+                width: 600px;
+                table-layout: fixed;
+                margin:0 auto;
+
+            }
+        </style>
+	</head>
+	<body>
+        <table id="car">
+            <thead>
+                <tr>
+                    <th>
+                        <label>全选<input type="checkbox" id="allcheck"></label><br/>
+                        <label>反选<input type="checkbox" id="allcheck"></label>
+                    </th>
+                    <th>名称</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小结</th>
+                    <th>编辑</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <!-- <tr>
+                        <td><input type="checkbox" class="check"/></td>
+                        <td><span></span><input type="text"></td>
+                        <td><span></span><input type="text"></td>
+                        <td><span></span><input type="text"></td>
+                        <td><span></span><input type="text"></td>
+                        <td>
+                            <a href="javascript:;" class="bjBtn">编辑</a>
+                            <a href="javascript:;" class="okBtn">确定</a>
+                            <a href="javascript:;" class="qxBtn">取消</a>
+                            <a href="javascript:;" class="scBtn">删除</a>
+                        </td>
+                    </tr> -->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">总价：<b id="total"></b></td>
+                </tr>
+            </tfoot>
+        </table>
+		<script type="text/javascript">
+		</script>
+	</body>
+</html>
