@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="tools.js"></script>
+		<title></title>
+		<style>
+			*{margin:0;padding:0;box-sizing: border-box;font-family: "微软雅黑";}
+            fieldset,img{border: 0;}
+            h1,h2,h3,h4,em,i,b,strong{font-style:normal;font-weight:normal;}
+            ul,ol{list-style:none;}
+            a{text-decoration:none;color: #333333;}
+            img{vertical-align: middle;}
+            input,button,select{outline: none;cursor: pointer;}
+            html,body{
+                height: 100%;
+            }
+			#div{
+				width:850px;
+				height:500px;
+				margin: 0 auto;
+				overflow:hidden;
+				position:relative;
+			 }
+			#div ul{
+				position: absolute;
+				display: flex;
+				height: 100%;
+				transition:all 1s;
+				top: 0;
+				left: 0;
+			} 
+			#div ul li{
+				height: 100%;
+				}
+			#div ol{
+				position: absolute;
+				display: flex;
+				align-items: center;
+				font-size: 18px;
+				z-index: 6;
+				bottom: 5%;
+				right: 5%;
+			}
+			#div ol li{
+				width: 50px;
+				height: 50px;
+				border-radius:50%;
+				background: rgba(255,255,255,.5);
+				text-align: center;
+				line-height: 50px;
+				margin-right:10px;
+				cursor: pointer;
+			}
+			#div span{
+				width: 40px;
+				height: 40px;
+				position: absolute;
+				top: 50%;
+				margin-top:-20px; 
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 40px;
+				color: #fff;
+				background: rgba(0,0,0,0.5);
+				z-index:6;
+				cursor: pointer;
+			}
+			#come{
+				right: 0;
+			}
+			#div ol .li1{
+				background:yellow;
+			}	
+			#div .a1{
+				left: -850px;
+			}
+
+			img{width:850px; height:500px;}
+</style>
+	</head>
+	<body>
+		<div id="div">
+			<ul>
+				<li><a href="javascript:alert(1);"><img src="1.jpg" /></a></li>
+				<li><a href="javascript:alert(2);"><img src="2.jpg" /></a></li>
+				<li><a href="javascript:alert(3);"><img src="3.jpg" /></a></li>
+				<li><a href="javascript:alert(4);"><img src="4.jpg" /></a></li>
+				<li><a href="javascript:alert(5);"><img src="5.jpg" /></a></li>
+			</ul>
+			<ol>
+				<li class="li1">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ol>
+			<span id="go">&laquo;</span>
+			<span id="come">&raquo;</span>
+		</div>
+		<script type="text/javascript">
+		class Pic{
+			constructor(div){
+				this.box = document.querySelector(div);
+				this.ul=this.box.querySelector("ul");
+				this.imgs= this.box.querySelector("ul").querySelectorAll("li");;
+				this.btns = this.box.querySelector("ol").querySelectorAll("li");
+				this.go = document.querySelector("#go");
+				this.come = document.querySelector("#come");
+				this.lastIndex = 0;
+				this.nextIndex = 0;
+				//自动循环
+				this.btnsFn();
+				//下一个
+				this.goFn();
+				//上一个
+				this.comeFn();
+				//绑定事件
+				this.btnonclick()
+			}
+			//循环绑定事件
+			btnonclick(){
+				console.log(this)//
+				var _this=this
+				for(var i=0;i<this.btns.length;i++){
+					_this.btns[i].setAttribute("order",i+1);
+					//每个按钮绑定
+					_this.btns[i].onmouseenter=function(e){
+						e=e||event;
+						//去除之前的ac
+						var n=this.getAttribute('order');
+						_this.nextIndex=n-1;
+						console.log(this)
+						_this.change()
+						//console.log(index);
+					}
+		        }
+			}
+			//点击btn位置改变
+			change(){
+				this.btns[this.lastIndex].classList.remove("ac");
+				//console.log(this.nextIndex)
+				if(this.nextIndex===this.btns.length){
+					this.nextIndex=0;
+				}else {
+					this.btns[this.nextIndex].classList.add("ac");
+				}
+				this.lastIndex=this.nextIndex; 
+				tools.move(this.ul,'left',-(this.nextIndex)*850);
+	        }
+			//自动循环
+			btnsFn(){
+				Array.from(this.btns).forEach((btn, i)=>{
+					btn.onclick = () =>{
+						this.index1 = i;
+						this.change();
+					}
+				})
+			}
+			//鼠标划上
+			this.box.onmouseenter=function(e){
+				e=e||event;
+				clearInterval(timer);
+			}
+			//鼠标移开
+			this.box.onmouseleave=function(e){
+				e=e||event;
+				time();
+			}
+			//下一个
+			goFn(){
+				this.go.onclick = ()=>{
+					if(++this.nextIndex===this.btns.length+1){
+					console.log(11)
+					this.ul.style.left=-4800+"px";
+					this.nextIndex = 0;
+				}
+				//调用改变事件
+				change()
+					
+			}	
+			//上一个
+			comeFn(){
+				this.come.onclick = ()=>{
+					if(--this.nextIndexndex<0){
+						this.ul.style.left=0;
+						this.nextIndex=this.btns.length-1;
+				    }
+					this.change();
+				}
+					
+			}
+			
+			
+		}
+		new Pic("#div");	
+		</script>
+	</body>
+</html>
